@@ -1,9 +1,13 @@
+import os
 import mysql.connector
+from dotenv import load_dotenv
+
+load_dotenv()
 
 conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="shivi1701"
+    host=os.getenv("MYSQLHOST"),
+    user=os.getenv("MYSQLUSER"),
+    password=os.getenv("MYSQLPASSWORD")
 )
 
 cursor = conn.cursor()
@@ -12,6 +16,8 @@ cursor.execute(
     "CREATE DATABASE IF NOT EXISTS karma_rescue"
 )
 
-print("Database Created")
+conn.commit()
+
+print("Database Created Successfully")
 
 conn.close()
