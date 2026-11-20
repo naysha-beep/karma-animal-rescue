@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 
 from db import connect_db
@@ -8,8 +8,11 @@ CORS(app)
 
 
 @app.route("/")
-def home():
-    return {"status": "running"}
+def login_page():
+    return render_template("login.html")
+@app.route("/dashboard")
+def dashboard_page():
+    return render_template("index.html")
 
 
 # ==========================
@@ -331,8 +334,8 @@ def add_staff():
 # DASHBOARD
 # ==========================
 
-@app.route("/dashboard")
-def dashboard():
+@app.route("/dashboard-stats")
+def dashboard_stats():
 
     conn = connect_db()
     cursor = conn.cursor(dictionary=True)
