@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Karma | Animal Rescue Management</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <a class="brand" href="#">
+            <span class="brand-mark">✦</span>
+            <span>
+                <span>Karma</span>
+                <small>RESCUE MANAGEMENT</small>
+            </span>
+        </a>
+
+        <div class="workspace-label">WORKSPACE</div>
+
+        <nav class="nav-list">
+
+            <button class="nav-link active" data-page="dashboard">
+                <span>▦</span> Dashboard
+            </button>
+
+            <button class="nav-link" data-page="animals">
+                <span>♡</span> Animals
+                <b id="navAnimalCount">0</b>
+            </button>
+
+            <button class="nav-link" data-page="medical">
+                <span>✚</span> Medical records
+            </button>
+
+            <button class="nav-link" data-page="vaccinations">
+                <span>⌁</span> Vaccinations
+                <i id="navVaccineDot"></i>
+            </button>
+
+            <button class="nav-link" data-page="adoptions">
+                <span>⌂</span> Adoptions
+            </button>
+            <button class="nav-link" data-page="staff">
+            <span>👥</span>
+                Staff
+            </button>
+
+            <button class="nav-link" data-page="reports">
+                <span>▤</span> Reports
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="help-card">
+                <div class="help-icon">♡</div>
+                <strong>Every paw matters.</strong>
+                <p>Small steps make a safer world for animals.</p>
+            </div>
+
+            <div class="profile-row">
+                <div class="avatar">PC</div>
+                <div>
+                    <strong id="loggedUser">
+                        Rescue Team
+                    </strong>
+                    <small>Staff workspace</small>
+                </div>
+                <span class="profile-dots">•••</span>
+            </div>
+
+        </div>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main-area">
+
+        <!-- TOP NAVIGATION -->
+        <header class="topbar">
+
+            <button class="mobile-menu" id="mobileMenu">
+                ☰
+            </button>
+
+            <div class="breadcrumbs">
+                Workspace <span>/</span>
+                <strong id="breadcrumb">Dashboard</strong>
+            </div>
+
+            <div class="top-actions">
+                <span class="today-pill">
+                    <span class="live-dot"></span>
+                    Demo workspace
+                </span>
+                <button id="logoutBtn" class="btn btn-outline"
+>                    Logout
+                </button>
+
+                <div class="top-avatar">PC</div>
+            </div>
+
+        </header>
+
+
+        <div class="page-wrap">
+
+            <!-- 1. DASHBOARD -->
+            <section class="page active" id="page-dashboard">
+
+                <div class="page-heading">
+                    <div>
+                        <div class="eyebrow">RESCUE OPERATIONS</div>
+                        <h1>Good to see you, team <span>✦</span></h1>
+                        <p>Here's what's happening at your shelter today.</p>
+                    </div>
+
+                    <button class="btn btn-primary" data-action="add-animal">
+                        + Add an animal
+                    </button>
+                </div>
+
+
+                <!-- HERO BANNER -->
+                <div class="hero-banner">
+
+                    <div class="hero-copy">
+                        <span class="hero-kicker">
+                            YOUR CARE MAKES A DIFFERENCE
+                        </span>
+
+                        <h2>
+                            Every rescue is a<br>
+                            new beginning.
+                        </h2>
+
+                        <p>
+                            Keep each animal's journey safe, healthy,
+                            and full of hope.
+                        </p>
+
+                        <button class="btn btn-light" data-page-link="animals">
+                            Explore animal records →
+                        </button>
+                    </div>
+
+                    <div class="hero-art">
+                        <div class="sun"></div>
+                        <div class="hero-circle">🐾</div>
+                        <div class="hero-pet">🐕</div>
+                        <div class="hero-spark spark-one">✦</div>
+                        <div class="hero-spark spark-two">✧</div>
+                    </div>
+
+                </div>
+
+
+                <!-- DASHBOARD STATISTICS -->
+                <div class="stats-grid">
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Total animals</span>
+                            <span class="stat-icon lilac">♡</span>
+                        </div>
+
+                        <div class="stat-number" id="statTotal">0</div>
+
+                        <div class="stat-foot">
+                            <span class="stat-note">
+                                All registered animals
+                            </span>
+                        </div>
+                    </article>
+
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Under care</span>
+                            <span class="stat-icon mint">✚</span>
+                        </div>
+
+                        <div class="stat-number" id="statCare">0</div>
+
+                        <div class="stat-foot">
+                            <span class="status-dot green"></span>
+                            <span class="stat-note">
+                                Currently at the shelter
+                            </span>
+                        </div>
+                    </article>
+
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Adopted</span>
+                            <span class="stat-icon peach">⌂</span>
+                        </div>
+
+                        <div class="stat-number" id="statAdopted">0</div>
+
+                        <div class="stat-foot">
+                            <span class="stat-note">
+                                Happy new beginnings
+                            </span>
+                        </div>
+                    </article>
+
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span>Vaccines due</span>
+                            <span class="stat-icon yellow">⌁</span>
+                        </div>
+
+                        <div class="stat-number" id="statDue">0</div>
+
+                        <div class="stat-foot">
+                            <span class="due-note">Needs attention</span>
+                        </div>
+                    </article>
+
+                </div>
+
+
+                <!-- RECENT ANIMALS AND ALERTS -->
+                <div class="content-grid">
+
+                    <article class="panel recent-panel">
+
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Recently registered</h3>
+                                <p>Latest animals added to your records</p>
+                            </div>
+
+                            <button class="text-button" data-page-link="animals">
+                                View all →
+                            </button>
+                        </div>
+
+                        <div id="recentAnimals" class="recent-list"></div>
+
+                    </article>
+
+
+                    <article class="panel attention-panel">
+
+                        <div class="panel-heading">
+                            <div>
+                                <h3>Needs attention</h3>
+                                <p>Upcoming vaccination follow-ups</p>
+                            </div>
+
+                            <span class="tiny-badge">THIS MONTH</span>
+                        </div>
+
+                        <div id="attentionList" class="attention-list"></div>
+
+                        <button class="btn btn-outline full-width"
+                                data-page-link="vaccinations">
+                            View vaccination schedule
+                        </button>
+
+                    </article>
+
+                </div>
+
+
+                <div class="bottom-note">
+                    <span>✦</span>
+
+                    <div>
+                        <strong>Good care starts with good records.</strong>
+                        <p>
+                            Keep animal profiles and medical details up to date
+                            so every team member can help.
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- 2. ANIMAL MANAGEMENT -->
+            <section class="page" id="page-animals">
+
+                <div class="page-heading">
+                    <div>
+                        <div class="eyebrow">RESCUE DATABASE</div>
+                        <h1>Animal records</h1>
+                        <p>
+                            Every animal has a story. Keep their details in one place.
+                        </p>
+                    </div>
+
+                    <button class="btn btn-primary" data-action="add-animal">
+                        + Register animal
+                    </button>
+                </div>
+
+
+                <!-- SEARCH AND FILTERS -->
+                <div class="toolbar">
+
+                    <label class="search-box">
+                        <span>⌕</span>
+                        <input
+                            id="animalSearch"
+                            type="search"
+                            placeholder="Search name, species, breed..."
+                        >
+                    </label>
+
+                    <select id="statusFilter" class="select-control">
+                        <option value="All">All statuses</option>
+                        <option>Under Care</option>
+                        <option>Adopted</option>
+                        <option>Transferred</option>
+                        <option>Released</option>
+                        <option>Deceased</option>
+                    </select>
+
+                    <select id="speciesFilter" class="select-control">
+                        <option value="All">All species</option>
+                        <option>Dog</option>
+                        <option>Cat</option>
+                        <option>Other</option>
+                    </select>
+
+                </div>
+
+
+                <!-- JAVASCRIPT GENERATES ANIMAL CARDS HERE -->
+                <div id="animalGrid" class="animal-grid"></div>
+
+                <div class="empty-state hidden" id="animalEmpty">
+                    <div>🐾</div>
+                    <h3>No animals found</h3>
+                    <p>Try changing your search or register a new animal.</p>
+                </div>
+
+            </section>
+
+
+            <!-- 3. MEDICAL RECORDS -->
+            <section class="page" id="page-medical">
+
+                <div class="page-heading">
+                    <div>
+                        <div class="eyebrow">HEALTH & WELLBEING</div>
+                        <h1>Medical records</h1>
+                        <p>Track visits, conditions, and treatment history.</p>
+                    </div>
+
+                    <button class="btn btn-primary" data-action="add-medical">
+                        + Add medical record
+                    </button>
+                </div>
+
+
+                <div class="panel table-panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Medical history</h3>
+                            <p>Records saved in this demo workspace</p>
+                        </div>
+
+                        <span class="tiny-badge" id="medicalCount">
+                            0 RECORDS
+                        </span>
+                    </div>
+
+
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ANIMAL</th>
+                                    <th>VISIT DATE</th>
+                                    <th>CONDITION</th>
+                                    <th>TREATMENT</th>
+                                    <th>VETERINARIAN</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="medicalTable"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- 4. VACCINATIONS -->
+            <section class="page" id="page-vaccinations">
+
+                <div class="page-heading">
+                    <div>
+                        <div class="eyebrow">PREVENTIVE CARE</div>
+                        <h1>Vaccination schedule</h1>
+                        <p>
+                            Stay ahead of upcoming doses and overdue follow-ups.
+                        </p>
+                    </div>
+
+                    <button class="btn btn-primary" data-action="add-vaccine">
+                        + Add vaccination
+                    </button>
+                </div>
+
+
+                <div class="vaccine-summary">
+
+                    <div>
+                        <span class="mini-icon yellow">⌁</span>
+                        <div>
+                            <small>Upcoming in 30 days</small>
+                            <strong id="vaccineUpcoming">0</strong>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="mini-icon pink">!</span>
+                        <div>
+                            <small>Overdue</small>
+                            <strong id="vaccineOverdue">0</strong>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="mini-icon mint">✓</span>
+                        <div>
+                            <small>All records</small>
+                            <strong id="vaccineAll">0</strong>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="panel table-panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Vaccination records</h3>
+                            <p>Next due dates are calculated from the saved date</p>
+                        </div>
+                    </div>
+
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ANIMAL</th>
+                                    <th>VACCINE</th>
+                                    <th>DATE GIVEN</th>
+                                    <th>NEXT DUE</th>
+                                    <th>STATUS</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="vaccineTable"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- 5. ADOPTIONS -->
+            <section class="page" id="page-adoptions">
+
+                <div class="page-heading">
+                    <div>
+                        <div class="eyebrow">NEW BEGINNINGS</div>
+                        <h1>Adoption records</h1>
+                        <p>
+                            Keep a record of animals moving into loving homes.
+                        </p>
+                    </div>
+
+                    <button class="btn btn-primary" data-action="add-adoption">
+                        + Record adoption
+                    </button>
+                </div>
+
+
+                <div class="panel table-panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Adoption history</h3>
+                            <p>Adopter details and placement dates</p>
+                        </div>
+
+                        <span class="tiny-badge" id="adoptionCount">
+                            0 ADOPTIONS
+                        </span>
+                    </div>
+
+
+                    <div class="table-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ANIMAL</th>
+                                    <th>ADOPTER</th>
+                                    <th>CONTACT</th>
+                                    <th>ADOPTION DATE</th>
+                                    <th>STATUS</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="adoptionTable"></tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <div class="adoption-tip">
+                    <span>♡</span>
+
+                    <div>
+                        <strong>A thoughtful handover matters.</strong>
+                        <p>
+                            Before adoption, confirm the animal's medical
+                            and vaccination records are up to date.
+                        </p>
+                    </div>
+                </div>
+
+            </section>
+
+<section class="page" id="page-staff">
+
+    <div class="page-heading">
+
+        <div>
+
+            <div class="eyebrow">
+                HUMAN RESOURCES
+            </div>
+
+            <h1>
+                Staff Management
+            </h1>
+
+            <p>
+                Manage shelter staff and volunteers.
+            </p>
+
+        </div>
+
+        <button
+            class="btn btn-primary"
+            data-action="add-staff"
+        >
+            + Add Staff
+        </button>
+
+    </div>
+
+    <div class="staff-summary">
+
+        <div class="staff-summary-card">
+
+            <div class="staff-summary-icon">
+                👥
+            </div>
+
+            <div>
+
+                <small>Total Staff</small>
+
+                <strong id="staffTotal">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="staff-summary-card">
+
+            <div class="staff-summary-icon active-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <small>Active</small>
+
+                <strong id="staffActive">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+        <div class="staff-summary-card">
+
+            <div class="staff-summary-icon leave-icon">
+                🏖
+            </div>
+
+            <div>
+
+                <small>On Leave</small>
+
+                <strong id="staffLeave">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div
+        id="staffGrid"
+        class="staff-grid"
+    >
+    </div>
+
+</section>
+            <!-- 6. REPORTS -->
+            <section class="page" id="page-reports">
+
+                <div class="page-heading">
+                    <div>
+                        <div class="eyebrow">SHELTER INSIGHTS</div>
+                        <h1>Reports overview</h1>
+                        <p>A quick snapshot of your rescue programme.</p>
+                    </div>
+
+                    <button class="btn btn-outline" id="exportCsv">
+                        ↓ Export animals CSV
+                    </button>
+                </div>
+
+
+                <div class="report-cards">
+
+                    <article class="report-card">
+                        <span>Registered animals</span>
+                        <strong id="reportTotal">0</strong>
+                        <div class="report-bar">
+                            <i id="barTotal"></i>
+                        </div>
+                    </article>
+
+                    <article class="report-card">
+                        <span>Under care</span>
+                        <strong id="reportCare">0</strong>
+                        <div class="report-bar care">
+                            <i id="barCare"></i>
+                        </div>
+                    </article>
+
+                    <article class="report-card">
+                        <span>Adopted</span>
+                        <strong id="reportAdopted">0</strong>
+                        <div class="report-bar adopted">
+                            <i id="barAdopted"></i>
+                        </div>
+                    </article>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Animal status breakdown</h3>
+                            <p>Distribution based on the current demo data</p>
+                        </div>
+                    </div>
+
+                    <div id="statusBreakdown" class="breakdown"></div>
+
+                </div>
+
+
+                <p class="report-disclaimer">
+                    Demo report only. For real NGO reporting, connect this
+                    interface to your Flask backend and MySQL database.
+                </p>
+
+            </section>
+
+        </div>
+    </main>
+
+</div>
+
+
+<!-- ADD / EDIT RECORD MODAL -->
+<div class="modal-backdrop hidden" id="modalBackdrop">
+
+    <section class="modal" role="dialog" aria-modal="true"
+             aria-labelledby="modalTitle">
+
+        <div class="modal-header">
+
+            <div>
+                <div class="eyebrow">KARMA DATABASE</div>
+                <h2 id="modalTitle">Register an animal</h2>
+            </div>
+
+            <button class="close-modal" id="closeModal"
+                    aria-label="Close">
+                ×
+            </button>
+
+        </div>
+
+
+        <form id="recordForm">
+
+            <!-- JavaScript inserts the appropriate form fields here -->
+            <div id="formFields" class="form-grid"></div>
+
+            <div class="form-actions">
+
+                <button type="button" class="btn btn-outline"
+                        id="cancelModal">
+                    Cancel
+                </button>
+
+                <button type="submit" class="btn btn-primary"
+                        id="saveButton">
+                    Save record
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</div>
+
+
+<!-- NOTIFICATION MESSAGE -->
+<div id="toast" class="toast" role="status"></div>
+
+
+<!-- JAVASCRIPT FILE -->
+ <script>
+
+const isLoggedIn =
+sessionStorage.getItem("karmaStaffLoggedIn");
+
+if(isLoggedIn !== "true"){
+
+    window.location.href = "login.html";
+}
+
+</script>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>

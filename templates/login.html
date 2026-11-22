@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karma Login</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <!-- Login styles embedded so this page works even if style.css fails to load -->
+    <style>
+        :root{--ink:#23342f;--muted:#7c8b84;--line:#e8eeea;--paper:#f7f9f6;--green:#277c63;--green-dark:#1e604e;--shadow:0 8px 28px rgba(36,66,51,.045)}
+        *{box-sizing:border-box}
+        body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:14px}
+        button,input{font:inherit}
+        button{cursor:pointer}
+
+        .login-page{min-height:100vh;display:flex;justify-content:center;align-items:center;background:var(--paper);padding:20px}
+        .login-card{width:100%;max-width:450px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:35px;box-shadow:var(--shadow)}
+        .login-logo{text-align:center;margin-bottom:25px}
+        .login-logo h1{font:800 30px Manrope,sans-serif;color:var(--green);margin:0}
+        .login-logo p{color:var(--muted);font-size:12px;margin-top:8px}
+        .login-form{display:grid;gap:16px}
+        .login-form label{display:block;font-size:11px;font-weight:700;color:#617067;margin-bottom:7px}
+        .login-form input{width:100%;border:1px solid #dfe7e2;border-radius:10px;padding:13px;outline:none}
+        .login-form input:focus{border-color:#84b89b;box-shadow:0 0 0 3px #e7f4eb}
+        .password-wrapper{position:relative}
+        .password-wrapper input{padding-right:64px}
+        .password-wrapper button{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:none;background:none;color:var(--green);font-weight:700}
+        .btn{border:1px solid transparent;border-radius:9px;padding:13px 15px;font-weight:700;font-size:13px;display:inline-flex;align-items:center;justify-content:center;transition:background .15s}
+        .btn-primary{background:var(--green);color:#fff}
+        .btn-primary:hover{background:var(--green-dark)}
+        .login-btn{width:100%;margin-top:10px}
+        #errorMessage{color:#d9534f;font-size:12px;min-height:18px;margin:0}
+    </style>
+</head>
+<body class="login-page">
+
+<div class="login-card">
+
+    <div class="login-logo">
+        <h1>Karma Rescue</h1>
+        <p>Staff login</p>
+    </div>
+
+    <form id="loginForm" class="login-form">
+
+        <div>
+            <label for="email">Email</label>
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter email"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="password">Password</label>
+            <div class="password-wrapper">
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter password"
+                    required
+                >
+                <button type="button" id="togglePassword">Show</button>
+            </div>
+        </div>
+
+        <p id="errorMessage"></p>
+
+        <button type="submit" class="btn btn-primary login-btn">
+            Login
+        </button>
+
+    </form>
+
+</div>
+
+<script src="/static/login.js"></script>
+
+</body>
+</html>
